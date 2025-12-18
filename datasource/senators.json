@@ -1,0 +1,144 @@
+{
+    "senators":[
+        {
+            "id":1,
+            "name":"ABALOS, BENHUR",
+            "patrylist":"PFP"
+        },
+        {
+            "id":2,
+            "name":"ABAYA, JOSEPH",
+            "patrylist":"NUP"
+        },
+        {
+            "id":3,
+            "name":"ABUEG, RISA HONTIVEROS",
+            "patrylist":"AKSYON"
+        },
+        {
+            "id":4,
+            "name":"AGARAN, CHRISTOPHER",
+            "patrylist":"LDP"
+        },
+        {
+            "id":5,
+            "name":"ALFONSO, IMEE",
+            "patrylist":"PDP-LABAN"
+        },
+        {
+            "id":6,
+            "name":"ALVAREZ, CYNTHIA",
+            "patrylist":"PDP-LABAN"
+        },
+        {
+            "id":7,
+            "name":"ANGARA, SONNY",
+            "patrylist":"LDP"
+        },
+        {
+            "id":8,
+            "name":"BONG GO, CHRISTOPHER",
+            "patrylist":"PDP-LABAN"
+        },
+        {
+            "id":9,
+            "name":"CAYETANO, PIA",
+            "patrylist":"NUP"
+        },
+        {
+            "id":10,
+            "name":"DE LIMA, LEILA",
+            "patrylist":"LDP"
+        },
+        {
+            "id":11,
+            "name":"DIAZ, FRANCIS",
+            "patrylist":"UNA"
+        },
+        {
+            "id":12,
+            "name":"DUTERTE, PACQUIAO",
+            "patrylist":"PDP-LABAN"
+        },  
+        {
+            "id":13,
+            "name":"ESCUDERO, FRANCIS",
+            "patrylist":"NUP"
+        },
+        {
+            "id":14,
+            "name":"GORDON, RICHARD",
+            "patrylist":"IND"
+        },
+        {
+            "id":15,
+            "name":"HONTIVEROS, RISA",
+            "patrylist":"AKSYON"
+        },
+        {
+            "id":16,
+            "name":"LACSON, PANFILO",
+            "patrylist":"IND"
+        },
+        {
+            "id":17,
+            "name":"LEGARDA, LOREN",
+            "patrylist":"NPC"
+        },
+        {
+            "id":18,
+            "name":"PANGILINAN, FRANCIS",
+            "patrylist":"PFP"
+        },
+        {
+            "id":19,
+            "name":"PASAYA, JEROME",
+            "patrylist":"PFP"
+        },
+        {
+            "id":20,
+            "name":"PASAYA, JEROME",
+            "patrylist":"PFP"
+        },
+        {
+            "id":21,
+            "name":"PASAYA, JEROME",
+            "patrylist":"PFP"
+        },
+        {
+            "id":22,
+            "name":"PASAYA, JEROME",
+            "patrylist":"PFP"
+        },
+        {
+            "id":23,
+            "name":"PASAYA, JEROME",
+            "patrylist":"PFP"
+        },
+        {
+            "id":24,
+            "name":"PASAYA, JEROME",
+            "patrylist":"PFP"
+        },
+        {
+            "id":25,
+            "name":"PASAYA, JEROME",
+            "patrylist":"PFP"
+        },
+        {
+            "id":26,
+            "name":"PASAYA, JEROME",
+            "patrylist":"PFP"
+        },
+        {
+            "id":27,
+            "name":"PASAYA, JEROME",
+            "patrylist":"PFP"
+        },
+        {
+            "id":28,
+            "name":"PASAYA, JEROME",
+            "patrylist":"PFP"
+        }
+    ]
+}
