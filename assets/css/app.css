@@ -1,0 +1,231 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #17212b;
+  background: #f3f6f8;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 20rem;
+  line-height: 1.5;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.page-shell {
+  width: min(100% - 2rem, 76rem);
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.page-header,
+.office,
+.page-footer {
+  border: 1px solid #d5dee5;
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 0.15rem 0.6rem rgb(20 44 66 / 6%);
+}
+
+.page-header {
+  padding: clamp(1.25rem, 4vw, 2rem);
+  margin-bottom: 1.25rem;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+.page-header h1 {
+  margin-bottom: 0.5rem;
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+}
+
+.page-header p:last-child {
+  margin-bottom: 0;
+}
+
+.draft-notice {
+  border-left: 0.3rem solid #a34a00;
+  padding: 0.85rem 1rem;
+  margin: 1rem 0 0;
+  background: #fff4e8;
+  color: #542700;
+}
+
+.office {
+  min-width: 0;
+  padding: 1.25rem;
+  margin: 1rem 0;
+}
+
+.office legend {
+  float: none;
+  width: auto;
+  padding: 0 0.4rem;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.office-help {
+  margin: 0 0 0.85rem;
+  color: #465564;
+}
+
+.candidate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 0.35rem 1rem;
+}
+
+.candidate-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  min-width: 0;
+  padding: 0.35rem 0;
+}
+
+.candidate-input {
+  flex: 0 0 auto;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.2rem;
+  accent-color: #075e9b;
+}
+
+.candidate-option label {
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.candidate-input:focus-visible,
+button:focus-visible {
+  outline: 3px solid #0879c5;
+  outline-offset: 3px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.25rem 0 0.75rem;
+}
+
+.actions button {
+  min-height: 2.75rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid #075e9b;
+  border-radius: 0.4rem;
+  background: #075e9b;
+  color: #fff;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background: #064b7b;
+}
+
+.actions .secondary-button {
+  border-color: #536474;
+  background: #fff;
+  color: #263746;
+}
+
+.actions .secondary-button:hover {
+  background: #edf2f5;
+}
+
+.selection-status {
+  min-height: 1.5rem;
+  margin: 0 0 1rem;
+  color: #304558;
+}
+
+.status-error {
+  color: #9c1c1c;
+  font-weight: 650;
+}
+
+.page-footer {
+  padding: 1rem 1.25rem;
+  color: #465564;
+}
+
+.page-footer p {
+  margin: 0;
+}
+
+.print-content {
+  display: none;
+}
+
+@media (max-width: 36rem) {
+  .page-shell {
+    width: min(100% - 1rem, 76rem);
+    padding-top: 0.5rem;
+  }
+
+  .office {
+    padding: 0.9rem;
+  }
+
+  .actions button {
+    flex: 1 1 100%;
+  }
+}
+
+@media print {
+  @page {
+    margin: 1.5cm;
+  }
+
+  body {
+    min-width: 0;
+    background: #fff;
+    color: #000;
+    font: 12pt/1.45 Georgia, "Times New Roman", serif;
+  }
+
+  body > * {
+    display: none !important;
+  }
+
+  #print-content {
+    display: block !important;
+  }
+
+  #print-content h1 {
+    font-size: 20pt;
+  }
+
+  #print-content h2 {
+    margin: 1rem 0 0.25rem;
+    font-size: 14pt;
+  }
+
+  #print-content ul {
+    margin-top: 0.25rem;
+  }
+
+  .print-notice {
+    border: 1px solid #555;
+    padding: 0.5rem;
+    font-weight: 700;
+  }
+}
