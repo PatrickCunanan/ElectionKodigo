@@ -19,9 +19,9 @@ election service, and it does not submit or save votes.
   12 Senators. Image creation requires the three single-choice selections and
   at least one Senator.
 - Reports missing required choices and enforces the Senator limit.
-- Generates a high-resolution PNG containing only selected entries, grouped
-  by office, and shows an image preview with a download link. Downloaded
-  filenames include the UTC generation timestamp.
+- Generates a high-resolution, portrait 9:16 PNG (1080 × 1920 pixels) with
+  selected entries stacked in one column, and shows an image preview with a
+  download link. Downloaded filenames include the UTC generation timestamp.
 - Clears an outdated image preview whenever selections change and describes
   the generated image's selected entries to assistive technology.
 - Keeps the current choice summary and the make/clear buttons visible in a
