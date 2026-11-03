@@ -88,7 +88,8 @@ p {
 
 .candidate-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: column;
   gap: 0.35rem 1rem;
 }
 
@@ -187,6 +188,11 @@ button:focus-visible {
 
   .actions button {
     flex: 1 1 100%;
+  }
+
+  .candidate-grid {
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
   }
 }
 
