@@ -1,7 +1,7 @@
 # ElectionKodigo — May 2028 draft
 
-ElectionKodigo is a small, static browser app for preparing and printing a
-personal voting reference ("kodigo"). This branch is a **draft scaffold** for
+ElectionKodigo is a small, static browser app for creating a ballot-style image
+of a personal voting reference ("kodigo"). This branch is a **draft scaffold** for
 the May 2028 Philippine national elections. It is not an official ballot or
 election service, and it does not submit or save votes.
 
@@ -14,12 +14,18 @@ election service, and it does not submit or save votes.
 
 - Renders placeholder choices for President, Vice President, Senators, and
   Party-list from one configuration file.
+- Displays choices in a compact, ballot-inspired layout.
 - Allows one President, one Vice President, one Party-list choice, and up to
-  12 Senators. Printing requires the three single-choice selections and at
-  least one Senator.
+  12 Senators. Image creation requires the three single-choice selections and
+  at least one Senator.
 - Reports missing required choices and enforces the Senator limit.
-- Prints only selected entries, grouped by office, using the browser's print
-  dialog and a print-specific stylesheet.
+- Generates a high-resolution PNG containing only selected entries, grouped
+  by office, and shows an image preview with a download link. Downloaded
+  filenames include the UTC generation timestamp.
+- Clears an outdated image preview whenever selections change and describes
+  the generated image's selected entries to assistive technology.
+- Keeps the current choice summary and the make/clear buttons visible in a
+  bottom action bar while the user scrolls.
 - Keeps all selections in the current page only; no server or browser storage
   is used.
 - Uses local assets only; no CDN or runtime package dependencies are required.
@@ -33,15 +39,11 @@ configurable draft setting and must be confirmed before release.
 
 | Path | Purpose |
 | --- | --- |
-| `index.html` | Accessible page shell, draft notice, action buttons, and print target. |
+| `index.html` | Accessible page shell, draft notice, action buttons, and PNG preview. |
 | `assets/js/placeholder-data.js` | 2028 draft metadata, office labels, placeholder counts, and selection limits. |
-| `assets/js/app.js` | Renders choices, validates selections, and prepares print output. |
-| `assets/css/app.css` | Responsive screen styles and print layout. |
+| `assets/js/app.js` | Renders choices, validates selections, and generates the PNG reference. |
+| `assets/css/app.css` | Responsive ballot-inspired selection UI and image preview styles. |
 | `index.php` | PHP hosting entry point that includes `index.html`. |
-| `Details.txt` | Historical election data; not loaded by the current page. |
-| `datasource/senators.json` | Legacy data file; not loaded by the current page. |
-| `assets/data/` | Historical spreadsheets; not loaded by the current page. |
-| `tablegen/` | Legacy spreadsheet-to-HTML utilities; not used by the current page. |
 
 ## Run locally
 
@@ -60,15 +62,11 @@ no network requests, so its ballot and interactions also work offline.
    official ballot numbers.
 3. Confirm required offices and selection limits, especially the Senator
    limit. Update the selection validation and copy if the official rules differ.
-4. Review the screen layout and print preview at desktop and mobile sizes.
+4. Review the screen layout and generated PNG at desktop and mobile sizes.
    Test missing selections, valid selections, the maximum Senator count, an
    attempted extra Senator, and clearing the form.
 5. Remove the draft warning only after all ballot data and behavior have been
    checked and approved.
-
-Historical spreadsheets, text data, and generator scripts are kept for
-reference only. They describe earlier election editions and must not be used
-as authoritative 2028 data.
 
 ## Validation
 
@@ -80,5 +78,5 @@ node --check assets/js/placeholder-data.js
 node --check assets/js/app.js
 ```
 
-Also test the user flow in a browser and inspect the print preview before
+Also test the user flow in a browser and inspect the generated PNG before
 publishing.
