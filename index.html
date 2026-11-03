@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="A printable draft voting reference for the May 2028 Philippine national elections."
+      content="A draft ballot-style PNG voting reference for the May 2028 Philippine national elections."
     />
     <title>May 2028 National Elections Kodigo — Draft</title>
     <link rel="stylesheet" href="assets/css/app.css" />
@@ -17,7 +17,7 @@
       <header class="page-header">
         <h1>May 2028 National Elections Kodigo</h1>
         <p>
-          Create and print a personal reference to help organize your choices.
+          Build a ballot-style image of your selected choices.
           This tool does not submit or store votes.
         </p>
         <p class="draft-notice" role="note">
@@ -32,21 +32,60 @@
       <main>
         <form id="kodigo-form" novalidate>
           <div id="ballot"></div>
-          <div class="actions">
-            <button id="print-button" type="button">
-              Review selections and print
-            </button>
-            <button id="reset-button" class="secondary-button" type="reset">
-              Clear selections
-            </button>
-          </div>
-          <p
-            id="selection-status"
-            class="selection-status"
-            role="status"
-            aria-live="polite"
-          ></p>
+          <section class="action-dock" aria-label="Voting guide actions">
+            <div class="action-dock-content">
+              <div class="action-dock-info">
+                <p
+                  id="selection-summary"
+                  class="selection-summary"
+                  aria-label="Your current choices"
+                  aria-live="polite"
+                  aria-atomic="true"
+                ></p>
+                <p class="action-hint">
+                  Make a picture of your choices, then download or print it.
+                </p>
+                <p
+                  id="selection-status"
+                  class="selection-status"
+                  role="status"
+                  aria-live="polite"
+                >Choose one candidate for each office and at least one Senator.</p>
+              </div>
+              <div class="actions">
+                <button id="create-image-button" type="button">
+                  Make my voting guide
+                </button>
+                <button id="reset-button" class="secondary-button" type="reset">
+                  Clear choices
+                </button>
+              </div>
+            </div>
+          </section>
         </form>
+
+        <section
+          id="image-output"
+          class="image-output"
+          aria-labelledby="image-output-heading"
+          hidden
+        >
+          <div class="image-output-heading">
+            <h2 id="image-output-heading">Your voting reference image</h2>
+            <a
+              id="download-image-link"
+              class="download-link"
+              download="may-2028-voting-reference.png"
+            >
+              Download my picture
+            </a>
+          </div>
+          <img
+            id="reference-image"
+            class="reference-image"
+            alt="Generated May 2028 personal voting reference"
+          />
+        </section>
       </main>
 
       <footer class="page-footer">
@@ -54,13 +93,16 @@
           No selections are saved. Confirm current polling-place rules before
           bringing a printed reference.
         </p>
+        <p class="maker-credit">
+          Created by Patrick Cunanan ·
+          <a
+            href="https://github.com/PatrickCunanan/ElectionKodigo"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub repository</a
+          >
+        </p>
       </footer>
     </div>
-
-    <section
-      id="print-content"
-      class="print-content"
-      aria-label="Selected voting reference"
-    ></section>
   </body>
 </html>
