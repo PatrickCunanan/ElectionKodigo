@@ -17,7 +17,7 @@
 
   function renderOffice(office) {
     const fieldset = document.createElement("fieldset");
-    fieldset.className = "office";
+    fieldset.className = `office office-${office.id}`;
     fieldset.id = `office-${office.id}`;
     fieldset.dataset.office = office.id;
     fieldset.tabIndex = -1;
@@ -40,6 +40,9 @@
 
     const options = document.createElement("div");
     options.className = "candidate-grid";
+    options.style.gridTemplateRows = `repeat(${Math.ceil(
+      office.placeholderCount / 3
+    )}, auto)`;
 
     for (let number = 1; number <= office.placeholderCount; number += 1) {
       const id = `candidate-${office.id}-${number}`;
