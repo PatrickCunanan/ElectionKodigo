@@ -158,9 +158,10 @@
   }
 
   function createReferenceCanvas(selections) {
-    const width = 1200;
-    const scale = 2;
-    const left = 80;
+    const width = 720;
+    const phoneHeight = 1280;
+    const scale = 1.5;
+    const left = 54;
     const contentWidth = width - left * 2;
     const sectionLayouts = [];
     const measureCanvas = document.createElement("canvas");
@@ -170,49 +171,36 @@
       throw new Error("Canvas is not supported in this browser.");
     }
 
-    measureContext.font = '22px "Segoe UI", "Helvetica Neue", Arial, sans-serif';
+    measureContext.font = '19px "Segoe UI", "Helvetica Neue", Arial, sans-serif';
 
-    let height = 190;
+    let contentBottom = 174;
     config.offices.forEach((office) => {
       const selected = selections[office.id];
       if (selected.length === 0) {
         return;
       }
 
-      const columns = office.id === "senator" ? 2 : 1;
-      const rows = Math.ceil(selected.length / columns);
-      const columnWidth = contentWidth / columns;
-      const items = selected.map((input) => {
-        const lines = wrapText(measureContext, input.value, columnWidth - 68);
-        return {
-          input,
-          lines,
-          column: Math.floor(selected.indexOf(input) / rows),
-          row: selected.indexOf(input) % rows,
-        };
-      });
-      const rowHeights = Array.from({ length: rows }, (_, row) => {
-        const rowItems = items.filter((item) => item.row === row);
-        return Math.max(
-          42,
-          ...rowItems.map((item) => item.lines.length * 28 + 16)
-        );
-      });
-      const sectionHeight = 48 + rowHeights.reduce((sum, value) => sum + value, 0);
+      const items = selected.map((input, row) => ({
+        input,
+        lines: wrapText(measureContext, input.value, contentWidth - 74),
+        row,
+      }));
+      const rowHeights = items.map((item) =>
+        Math.max(42, item.lines.length * 25 + 16)
+      );
+      const sectionHeight =
+        44 + rowHeights.reduce((sum, value) => sum + value, 0);
 
       sectionLayouts.push({
         office,
         items,
-        rows,
-        columns,
-        columnWidth,
         rowHeights,
-        top: height,
+        top: contentBottom,
         height: sectionHeight,
       });
-      height += sectionHeight + 20;
+      contentBottom += sectionHeight + 16;
     });
-    height += 82;
+    const height = Math.max(phoneHeight, contentBottom + 76);
 
     const canvas = document.createElement("canvas");
     canvas.width = width * scale;
@@ -227,79 +215,66 @@
     context.fillStyle = "#fffdf8";
     context.fillRect(0, 0, width, height);
     context.fillStyle = "#18364a";
-    for (let y = 12; y < height; y += 28) {
-      context.fillRect(22, y, 18, 18);
-      context.fillRect(width - 40, y, 18, 18);
+    for (let y = 12; y < height; y += 24) {
+      context.fillRect(14, y, 12, 12);
+      context.fillRect(width - 26, y, 12, 12);
     }
     context.strokeStyle = "#18364a";
-    context.lineWidth = 2;
-    context.strokeRect(51, 22, width - 102, height - 44);
+    context.lineWidth = 1.5;
+    context.strokeRect(35, 18, width - 70, height - 36);
 
     context.textAlign = "center";
     context.fillStyle = "#547080";
-    context.font = '600 23px "Segoe UI", "Helvetica Neue", Arial, sans-serif';
-    context.fillText(config.election.toUpperCase(), width / 2, 67);
+    context.font = '600 17px "Segoe UI", "Helvetica Neue", Arial, sans-serif';
+    context.fillText(config.election.toUpperCase(), width / 2, 54);
     context.fillStyle = "#18364a";
-    context.font = '700 36px Georgia, "Times New Roman", serif';
-    context.fillText("Personal voting reference", width / 2, 116);
+    context.font = '700 27px Georgia, "Times New Roman", serif';
+    context.fillText("Personal voting reference", width / 2, 96);
     context.fillStyle = "#9a5a29";
-    context.font = '700 18px "Segoe UI", "Helvetica Neue", Arial, sans-serif';
-    context.fillText(config.status, width / 2, 153);
+    context.font = '700 14px "Segoe UI", "Helvetica Neue", Arial, sans-serif';
+    context.fillText(config.status, width / 2, 132);
 
     context.textAlign = "left";
     sectionLayouts.forEach((layout) => {
-      const { office, items, columns, columnWidth, rowHeights, top } = layout;
+      const { office, items, rowHeights, top } = layout;
       context.fillStyle = "#eaf0ee";
-      context.fillRect(left, top, contentWidth, 48);
+      context.fillRect(left, top, contentWidth, 44);
       context.strokeStyle = "#b8c8c6";
       context.lineWidth = 1.5;
       context.strokeRect(left, top, contentWidth, layout.height);
       context.fillStyle = "#18364a";
-      context.font = '700 21px "Segoe UI", "Helvetica Neue", Arial, sans-serif';
+      context.font = '700 16px "Segoe UI", "Helvetica Neue", Arial, sans-serif';
       context.fillText(
         `${office.label.toUpperCase()} — SELECTED`,
         left + 18,
-        top + 32
+        top + 29
       );
 
-      let rowTop = top + 48;
-      for (let row = 0; row < layout.rows; row += 1) {
+      let rowTop = top + 44;
+      for (let row = 0; row < items.length; row += 1) {
         context.strokeStyle = "#d8e0de";
         context.beginPath();
         context.moveTo(left, rowTop + rowHeights[row]);
         context.lineTo(left + contentWidth, rowTop + rowHeights[row]);
         context.stroke();
 
-        for (let column = 0; column < columns; column += 1) {
-          const item = items.find(
-            (entry) => entry.row === row && entry.column === column
-          );
-          if (!item) {
-            continue;
-          }
+        const item = items[row];
+        const itemLeft = left + 18;
+        const boxTop = rowTop + 11;
+        context.strokeStyle = "#26746c";
+        context.lineWidth = 2;
+        context.strokeRect(itemLeft, boxTop, 17, 17);
+        context.beginPath();
+        context.moveTo(itemLeft + 3, boxTop + 9);
+        context.lineTo(itemLeft + 7, boxTop + 13);
+        context.lineTo(itemLeft + 14, boxTop + 4);
+        context.stroke();
 
-          const itemLeft = left + column * columnWidth + 18;
-          const boxTop = rowTop + 12;
-          context.strokeStyle = "#26746c";
-          context.lineWidth = 2.5;
-          context.strokeRect(itemLeft, boxTop, 20, 20);
-          context.beginPath();
-          context.moveTo(itemLeft + 4, boxTop + 10);
-          context.lineTo(itemLeft + 8, boxTop + 15);
-          context.lineTo(itemLeft + 17, boxTop + 5);
-          context.stroke();
-
-          context.fillStyle = "#243746";
-          context.font = '22px "Segoe UI", "Helvetica Neue", Arial, sans-serif';
-          item.lines.forEach((line, index) => {
-            context.fillText(
-              line,
-              itemLeft + 32,
-              rowTop + 30 + index * 28,
-              columnWidth - 58
-            );
-          });
-        }
+        context.fillStyle = "#243746";
+        context.font = '19px "Segoe UI", "Helvetica Neue", Arial, sans-serif';
+        item.lines.forEach((line, index) => {
+          context.fillText(line, itemLeft + 29, rowTop + 25 + index * 25);
+        });
 
         rowTop += rowHeights[row];
       }
@@ -311,12 +286,12 @@
     context.fillText(
       "PLACEHOLDER DATA — verify all entries with official election information.",
       width / 2,
-      height - 49
+      height - 44
     );
     context.fillText(
       "Personal reference only. Follow current election rules.",
       width / 2,
-      height - 25
+      height - 23
     );
 
     return canvas;
